@@ -5,6 +5,8 @@
 namespace kondo {
   const uint32_t PACKET_WAIT_SLEEP_TIME = 10; // msec
 
+  const uint32_t DEFAULT_BAUDRATE = 1500000;
+
   typedef uint8_t ID_t;
   typedef uint8_t address_t;
 

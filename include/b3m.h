@@ -36,7 +36,7 @@ namespace kondo {
      * @param filename Filename of SerialPort.
      * @param baudrate BaudRate for SerialPort.
      */
-    B3M(const std::string& filename, const int32_t baudrate);
+    B3M(const std::string& filename, const int32_t baudrate=DEFAULT_BAUDRATE);
 
     /**
      * Destructor
@@ -50,7 +50,7 @@ namespace kondo {
 
     void receivePacket(Packet* packet);
 
-    void checkError(const option_t option, const status_t status);
+    void checkError(const ID_t id, const option_t option, const status_t status);
 
   private:
     /**

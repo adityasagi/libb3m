@@ -4,13 +4,16 @@
 #include <string>
 #include <exception>
 
+#include "b3mcommon.h"
+
 namespace kondo {
   class B3MException : public std::exception {
   public:
+    ID_t id;
     std::string message;
     uint8_t errorCode;
   public:
-    B3MException(uint8_t errorCode) { this->errorCode = errorCode;}
+    B3MException(ID_t id, uint8_t errorCode) { this->id = id; this->errorCode = errorCode;}
     virtual ~B3MException() throw() {}
 
   public:
@@ -19,56 +22,59 @@ namespace kondo {
 	return message.c_str();
       }
       std::ostringstream ss;
-      ss << message << "(errorCode=" << errorCode << ")";
+      ss << message << " (id=" << id << ", errorCode=" << errorCode << ")";
       return ss.str().c_str();
     }
   };
 
   class TimeoutException : public B3MException {
   public:
-  TimeoutException() : B3MException(0) {
+  TimeoutException(ID_t id) : B3MException(id, 0) {
       message = "TimeoutException";
     }
   };
 
   class ChecksumException : public B3MException {
+
   public:
-  ChecksumException() : B3MException(0) {
-      message = "ChecksumException";
+  ChecksumException(ID_t id, ID_t receivedID) : B3MException(id, 0) {
+      std::ostringstream ss;
+      ss << "ChecksumException(received_ID=" << receivedID << " <= this may be invalid)";
+      message = ss.str();
     }
   };
 
   class ErrorStatusException : public B3MException {
   public:
-  ErrorStatusException(status_t status = 0) : B3MException(status) {
+  ErrorStatusException(ID_t id, status_t status = 0) : B3MException(id, status) {
       message = "ErrorStatusException";
     }
   };
 
   class SystemException : public B3MException {
   public:
-  SystemException(status_t status = 0) : B3MException(status) {
+  SystemException(ID_t id, status_t status = 0) : B3MException(id, status) {
       message = "SystemException";
     }
   };
 
   class MotorException : public B3MException {
   public:
-  MotorException(status_t status = 0) : B3MException(status) {
+  MotorException(ID_t id, status_t status = 0) : B3MException(id, status) {
       message = "MotorException";
     }
   };
 
   class UARTException : public B3MException {
   public:
-  UARTException(status_t status = 0) : B3MException(status) {
+  UARTException(ID_t id, status_t status = 0) : B3MException(id, status) {
       message = "UARTException";
     }
   };
 
   class CommandException : public B3MException {
   public:
-  CommandException(status_t status = 0) : B3MException(status) {
+  CommandException(ID_t id, status_t status = 0) : B3MException(id, status) {
       message = "CommandException";
     }
   };

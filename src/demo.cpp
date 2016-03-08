@@ -6,7 +6,7 @@
 
 using namespace kondo;
 
-#define BAUDRATE 115200
+#define BAUDRATE 1500000
 
 B3M* pb3m;
 

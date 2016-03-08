@@ -13,7 +13,6 @@ B3M::~B3M() {
 
 
 void B3M::sendPacket(const Packet& packet) {
-
   packet.serialize(m_pPacketBuffer);
   m_pSerialPort->Write(m_pPacketBuffer, packet.size());
 }
@@ -33,25 +32,29 @@ void B3M::receivePacket(Packet* packet) {
   }
 
   m_pSerialPort->Read(m_pPacketBuffer + 1, c-1);
-
-  packet->deserialize(m_pPacketBuffer);
+  try {
+    packet->deserialize(m_pPacketBuffer);
+  } catch (ChecksumException &ex) {
+    ex.id = packet->id;
+    throw;
+  }
 }
 
-void B3M::checkError(const option_t option, const status_t status) {
+void B3M::checkError(const ID_t id, const option_t option, const status_t status) {
   if (status > 0) {
     switch(option) {
     case OPTION_ERROR_STATUS:
-      throw ErrorStatusException(status);
+      throw ErrorStatusException(id, status);
     case OPTION_SYSTEM_STATUS:
-      throw SystemException(status);
+      throw SystemException(id, status);
     case OPTION_MOTOR_STATUS:
-      throw MotorException(status);
+      throw MotorException(id, status);
     case OPTION_COMMAND_STATUS:
-      throw CommandException(status);
+      throw CommandException(id, status);
     case OPTION_UART_STATUS:
-      throw UARTException(status);
+      throw UARTException(id, status);
     default:
-      throw B3MException(0);
+      throw B3MException(id, 0);
     }
   }
 }
@@ -64,7 +67,7 @@ void B3M::load(const ID_t id) {
   m_Packet.data_length = 0;
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
-  checkError(OPTION_ERROR_STATUS, m_Packet.status());
+  checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
 }
 
 void B3M::save(const ID_t id) {
@@ -75,7 +78,7 @@ void B3M::save(const ID_t id) {
   m_Packet.data_length = 0;
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
-  checkError(OPTION_ERROR_STATUS, m_Packet.status());
+  checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
 }
 
 void B3M::reset(const ID_t id) {
@@ -100,7 +103,7 @@ void B3M::read(const ID_t id, const address_t address, const uint8_t length, uin
   m_Packet.data[1] = length;
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
-  checkError(OPTION_ERROR_STATUS, m_Packet.status());
+  checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
   memcpy(buffer, m_Packet.data, length);
 }
 
@@ -116,7 +119,7 @@ void B3M::write(const ID_t id, const address_t address, const uint8_t length, co
   m_Packet.data[length+1] = length;
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
-  checkError(OPTION_ERROR_STATUS, m_Packet.status());
+  checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
 }
 
 void B3M::position(const ID_t id, const int16_t pos, const uint16_t time)
@@ -130,6 +133,6 @@ void B3M::position(const ID_t id, const int16_t pos, const uint16_t time)
   serialize_short<uint16_t>(m_Packet.data+2, time);
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
-  checkError(OPTION_ERROR_STATUS, m_Packet.status());
+  checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
 }
 

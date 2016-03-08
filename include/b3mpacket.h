@@ -46,6 +46,7 @@ namespace kondo {
     void deserialize(const uint8_t *packet_buffer) {
       uint8_t size = packet_buffer[0];
       uint8_t sum = 0;
+      uint8_t id_buf = id;
       command = static_cast<command_t>(packet_buffer[1]);
       option  = static_cast<option_t>(packet_buffer[2]);
       id = packet_buffer[3];
@@ -56,7 +57,7 @@ namespace kondo {
 	sum += data[i];
       }
       if (packet_buffer[4 + data_length] != sum) {
-	throw new ChecksumException();
+	throw ChecksumException(id_buf, id);
       }
     }
   };
