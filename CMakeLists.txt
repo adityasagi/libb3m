@@ -25,7 +25,7 @@ set(SHARE_INSTALL_DIR
 # Subdirectories
 # add_subdirectory(cmake)
 add_subdirectory(include)
-add_subdirectory(doc)
+# add_subdirectory(doc)
 add_subdirectory(src)
 
 # Package creation
@@ -37,11 +37,11 @@ set(PROJECT_EXECUTABLES ${PROJECT_NAME}_demo
 set(example_files example/CMakeLists.txt example/demo.cpp)
 install(FILES ${example_files} DESTINATION ${SHARE_INSTALL_DIR}/example COMPONENT library)
 
-set(cpack_options "${PROJECT_BINARY_DIR}/cpack_options.cmake")
-configure_file("${PROJECT_SOURCE_DIR}/cmake/cpack_options.cmake.in"
-    ${cpack_options} @ONLY)
-set(CPACK_PROJECT_CONFIG_FILE ${cpack_options})
-include(${CPACK_PROJECT_CONFIG_FILE})
-include(CPack)
+# set(cpack_options "${PROJECT_BINARY_DIR}/cpack_options.cmake")
+# configure_file("${PROJECT_SOURCE_DIR}/cmake/cpack_options.cmake.in"
+#    ${cpack_options} @ONLY)
+# set(CPACK_PROJECT_CONFIG_FILE ${cpack_options})
+# include(${CPACK_PROJECT_CONFIG_FILE})
+# include(CPack)
 
 

@@ -14,7 +14,7 @@ namespace kondo {
   /**
    * Class for KONDO B3M series.
    */
-  class B3M {
+  class B3MAPI B3M {
   private:
     /**
      * Serial Port Utility Class object.

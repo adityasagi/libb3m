@@ -1,5 +1,17 @@
 #pragma once
 
+
+#ifdef WIN32
+#ifdef _WINDLL
+#define B3MAPI __declspec(dllexport)
+#else
+#define B3MAPI __declspec(dllimport)
+#endif
+#else
+#define B3MAPI 
+#endif
+
+
 #include <stdint.h>
 
 namespace kondo {

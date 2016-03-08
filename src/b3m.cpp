@@ -116,7 +116,7 @@ void B3M::write(const ID_t id, const address_t address, const uint8_t length, co
   m_Packet.data_length = length + 2;
   memcpy(m_Packet.data, buffer, length);
   m_Packet.data[length  ] = address;
-  m_Packet.data[length+1] = length;
+  m_Packet.data[length+1] = 1;
   sendPacket(m_Packet);
   receivePacket(&m_Packet);
   checkError(id, OPTION_ERROR_STATUS, m_Packet.status());
