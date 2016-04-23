@@ -283,6 +283,9 @@ namespace kondo {
      */
     int16_t getActualCurrent(const ID_t id) { return readShort<int16_t>(id, ADDRESS_MOTOR_CURRENT); }
 
+	void setTargetCurrent(const ID_t id, const int16_t current) {
+		writeShort<int16_t>(id, ADDRESS_TARGET_CURRENT, current);
+	}
     /**
      * Set Target Velocity to ID
      * @param id ID

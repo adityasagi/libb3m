@@ -2,8 +2,8 @@
 set(_srcs b3m.cpp)
 set(_demo_srcs demo.cpp)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
-include_directories(${PROJECT_SOURCE_DIR}/libaqua/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../libaqua/include)
 
 find_package(Threads)
 

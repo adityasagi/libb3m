@@ -15,6 +15,9 @@ namespace kondo {
   static const uint8_t ADDRESS_MODE = 0x28;
   static const uint8_t ADDRESS_TARGET_VELOCITY = 0x30;
   static const uint8_t ADDRESS_ACTUAL_VELOCITY = 0x32;
+
+  static const uint8_t ADDRESS_TARGET_CURRENT = 0x3C;
+
   static const uint8_t ADDRESS_ENCODER_COUNT = 0x50;
   static const uint8_t ADDRESS_ENCODER_TOTAL_COUNT = 0x52;
   
