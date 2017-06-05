@@ -2,7 +2,7 @@
 
 * Author: Yuki Suga (Sugar Sweet Robotics Co. Ltd.)
 * Copyright: SUGAR SWEET ROBOTICS 2017
-* License: GPL V2
+* License: GPL V3
 
 
 
