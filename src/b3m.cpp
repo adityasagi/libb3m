@@ -1,7 +1,7 @@
 
 #include "b3m.h"
 using namespace kondo;
-hoe
+
 B3M::B3M(const std::string& filename, const int32_t baudrate) {
   m_pSerialPort = new ssr::SerialPort(filename.c_str(), baudrate);
 }
