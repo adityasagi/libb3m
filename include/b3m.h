@@ -173,6 +173,11 @@ namespace kondo {
       writeLong<uint32_t>(id, ADDRESS_IGAIN0, Ki);
     }
 
+    void setMyu0(const ID_t id, const uint16_t staticMyu, const uint16_t dynamicMyu) {
+      writeShort<uint16_t>(id, ADDRESS_STATIC_U0, staticMyu);
+      writeShort<uint16_t>(id, ADDRESS_DYNAMIC_U0, dynamicMyu);
+    }
+
     /**
      * Set Control Gain 1
      * @param ID id
@@ -186,6 +191,11 @@ namespace kondo {
       writeLong<uint32_t>(id, ADDRESS_IGAIN1, Ki);
     }
 
+    void setMyu1(const ID_t id, const uint16_t staticMyu, const uint16_t dynamicMyu) {
+      writeShort<uint16_t>(id, ADDRESS_STATIC_U1, staticMyu);
+      writeShort<uint16_t>(id, ADDRESS_DYNAMIC_U1, dynamicMyu);
+    }
+
     /**
      * Set Control Gain 2
      * @param ID id
@@ -197,6 +207,11 @@ namespace kondo {
       writeLong<uint32_t>(id, ADDRESS_PGAIN2, Kp);
       writeLong<uint32_t>(id, ADDRESS_DGAIN2, Kd);
       writeLong<uint32_t>(id, ADDRESS_IGAIN2, Ki);
+    }
+
+    void setMyu2(const ID_t id, const uint16_t staticMyu, const uint16_t dynamicMyu) {
+      writeShort<uint16_t>(id, ADDRESS_STATIC_U2, staticMyu);
+      writeShort<uint16_t>(id, ADDRESS_DYNAMIC_U2, dynamicMyu);
     }
 
     /**
@@ -283,9 +298,14 @@ namespace kondo {
      */
     int16_t getActualCurrent(const ID_t id) { return readShort<int16_t>(id, ADDRESS_MOTOR_CURRENT); }
 
-	void setTargetCurrent(const ID_t id, const int16_t current) {
-		writeShort<int16_t>(id, ADDRESS_TARGET_CURRENT, current);
-	}
+    /**
+     * Set Target Current 
+     * @param id ID
+     * @param current Electric Current
+     */
+    void setTargetCurrent(const ID_t id, const int16_t current) {
+      writeShort<int16_t>(id, ADDRESS_TARGET_CURRENT, current);
+    }
     /**
      * Set Target Velocity to ID
      * @param id ID
@@ -293,6 +313,9 @@ namespace kondo {
      */
     void setTargetVelocity(const ID_t id, const int16_t vel) {writeShort<int16_t>(id, ADDRESS_TARGET_VELOCITY, vel);}
 
+    void setTargetPosition(const ID_t id, const int16_t pos) {writeShort<int16_t>(id, ADDRESS_TARGET_POSITION, pos);}
+
+    int16_t getActualPosition(const ID_t id) { return readShort<int16_t>(id, ADDRESS_ACTUAL_POSITION); }
     /**
      * Get Current Actual Velocity
      * @param id ID

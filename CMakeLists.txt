@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(b3m)
 
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   # Mac OS X specific code
+   SET(CMAKE_CXX_COMPILER "g++")
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
 set(PROJECT_VERSION 1.0.2 CACHE STRING "libb3m version")
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
