@@ -33,11 +33,11 @@ namespace kondo {
   static const uint8_t ADDRESS_IGAIN1 = 0x76;
   static const uint8_t ADDRESS_STATIC_U1 = 0x7A;
   static const uint8_t ADDRESS_DYNAMIC_U1 = 0x7C;
-  static const uint8_t ADDRESS_PGAIN2 = 0x6E;
-  static const uint8_t ADDRESS_DGAIN2 = 0x72;
-  static const uint8_t ADDRESS_IGAIN2 = 0x76;
-  static const uint8_t ADDRESS_STATIC_U2 = 0x7A;
-  static const uint8_t ADDRESS_DYNAMIC_U2 = 0x7C;
+  static const uint8_t ADDRESS_PGAIN2 = 0x7E;
+  static const uint8_t ADDRESS_DGAIN2 = 0x82;
+  static const uint8_t ADDRESS_IGAIN2 = 0x86;
+  static const uint8_t ADDRESS_STATIC_U2 = 0x8A;
+  static const uint8_t ADDRESS_DYNAMIC_U2 = 0x8C;
 
   static const uint8_t ADDRESS_MCU_TEMPERATURE = 0x44;
   static const uint8_t ADDRESS_MOTOR_TEMPERATURE = 0x46;
