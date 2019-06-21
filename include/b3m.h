@@ -9,7 +9,11 @@
 
 #include "SerialPort.h"
 #include "Thread.h"
-    
+   
+
+#include "gpio.h"
+
+
 namespace kondo {
   /**
    * Class for KONDO B3M series.
@@ -25,6 +29,12 @@ namespace kondo {
      * Byte buffer for packet sending/receiving
      */
     uint8_t m_pPacketBuffer[MAX_DATA_SIZE+4];
+
+
+    /**
+     * GPIO pin to enable while using the UART port on the UART to RS-485 converter
+     */
+    gpio en_pin;
 
     ssr::Mutex m_PacketMutex;
 

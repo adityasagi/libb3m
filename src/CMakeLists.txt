@@ -1,5 +1,5 @@
 
-set(_srcs b3m.cpp)
+set(_srcs b3m.cpp gpio.cpp)
 set(_demo_srcs demo.cpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)

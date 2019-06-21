@@ -2,7 +2,7 @@
 #include "b3m.h"
 using namespace kondo;
 
-B3M::B3M(const std::string& filename, const int32_t baudrate) {
+B3M::B3M(const std::string& filename, const int32_t baudrate): en_pin(67) {
   m_pSerialPort = new ssr::SerialPort(filename.c_str(), baudrate);
 }
 
@@ -14,7 +14,9 @@ B3M::~B3M() {
 
 void B3M::sendPacket(const Packet& packet) {
   packet.serialize(m_pPacketBuffer);
+  en_pin.setGPIO();
   m_pSerialPort->Write(m_pPacketBuffer, packet.size());
+  en_pin.clearGPIO();
 }
 
 
